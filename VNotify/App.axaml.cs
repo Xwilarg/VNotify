@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using VNotify.Models;
 using VNotify.ViewModels;
 using VNotify.Views;
 

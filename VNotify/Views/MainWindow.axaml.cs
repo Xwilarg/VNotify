@@ -1,10 +1,12 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
+using VNotify.ViewModels;
 
 namespace VNotify.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public MainWindow()
         {
@@ -12,6 +14,14 @@ namespace VNotify.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+
+            this.WhenActivated(_ =>
+            {
+                if (!ViewModel!.AreDataLoaded())
+                {
+                    new ApiKeyWindow().Show(this);
+                }
+            });
         }
     }
 }
