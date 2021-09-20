@@ -19,7 +19,10 @@ namespace VNotify.Views
             {
                 if (!ViewModel!.AreDataLoaded())
                 {
-                    new ApiKeyWindow().Show(this);
+                    new ApiKeyWindow()
+                    {
+                        ViewModel = new ApiKeyWindowViewModel()
+                    }.Show(this);
                 }
             });
         }

@@ -10,13 +10,24 @@ namespace VNotify.Models
 
         public static SaveData Load()
         {
-            if (!File.Exists("data.json")) // No savefile found
+            if (_saveData == null)
             {
-                return new SaveData();
+                if (!File.Exists("data.json")) // No savefile found
+                {
+                    return new SaveData();
+                }
+                _saveData = JsonSerializer.Deserialize<SaveData>(File.ReadAllText("data.json")) ?? new SaveData();
             }
-            return JsonSerializer.Deserialize<SaveData>(File.ReadAllText("data.json")) ?? new SaveData();
+            return _saveData;
+        }
+
+        public void Save()
+        {
+            File.WriteAllText("data.json", JsonSerializer.Serialize(this));
         }
 
         public string ApiKey { set; get; }
+
+        private static SaveData _saveData;
     }
 }
