@@ -2,9 +2,9 @@ using Avalonia;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
-using VNotify.ViewModels;
+using VNotify.Application.ViewModels;
 
-namespace VNotify.Views
+namespace VNotify.Application.Views
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {

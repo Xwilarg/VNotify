@@ -3,7 +3,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
 
-namespace VNotify.ViewModels
+namespace VNotify.Application.ViewModels
 {
     public class ApiKeyWindowViewModel : ReactiveObject
     {

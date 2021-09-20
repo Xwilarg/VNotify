@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Text.Json;
 
-namespace VNotify.Models
+namespace VNotify.Application.Models
 {
     public class SaveData
     {
-        private SaveData()
+        public SaveData()
         { }
 
         public static SaveData Load()
@@ -26,19 +26,7 @@ namespace VNotify.Models
             File.WriteAllText("data.json", JsonSerializer.Serialize(this));
         }
 
-        private string? _apiKey;
-        public string? ApiKey
-        {
-            set
-            {
-                _apiKey = value;
-                StaticObjects.HttpClient.DefaultRequestHeaders.Add("X-APIKEY", _apiKey);
-            }
-            get
-            {
-                return _apiKey;
-            }
-        }
+        public string? ApiKey;
 
         private static SaveData? _saveData;
     }

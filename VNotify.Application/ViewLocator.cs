@@ -3,7 +3,7 @@ using Avalonia.Controls.Templates;
 using ReactiveUI;
 using System;
 
-namespace VNotify
+namespace VNotify.Application
 {
     public class ViewLocator : IDataTemplate
     {

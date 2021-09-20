@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace VNotify
+namespace VNotify.Application
 {
     class Program
     {

@@ -1,7 +1,7 @@
 using ReactiveUI;
-using VNotify.Models;
+using VNotify.Application.Models;
 
-namespace VNotify.ViewModels
+namespace VNotify.Application.ViewModels
 {
     public class MainWindowViewModel : ReactiveObject
     {
@@ -13,6 +13,6 @@ namespace VNotify.ViewModels
         public bool AreDataLoaded()
             => _data.ApiKey != null;
 
-        private SaveData _data;
+        private readonly SaveData _data;
     }
 }

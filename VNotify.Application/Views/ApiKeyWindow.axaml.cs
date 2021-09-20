@@ -4,10 +4,10 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System.Reactive;
-using VNotify.Models;
-using VNotify.ViewModels;
+using VNotify.Application.Models;
+using VNotify.Application.ViewModels;
 
-namespace VNotify.Views
+namespace VNotify.Application.Views
 {
     public partial class ApiKeyWindow : ReactiveWindow<ApiKeyWindowViewModel>
     {

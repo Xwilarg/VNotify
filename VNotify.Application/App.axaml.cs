@@ -1,13 +1,11 @@
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using VNotify.Models;
-using VNotify.ViewModels;
-using VNotify.Views;
+using VNotify.Application.ViewModels;
+using VNotify.Application.Views;
 
-namespace VNotify
+namespace VNotify.Application
 {
-    public class App : Application
+    public class App : Avalonia.Application
     {
         public override void Initialize()
         {
