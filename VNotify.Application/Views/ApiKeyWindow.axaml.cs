@@ -4,8 +4,8 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System.Reactive;
-using VNotify.Application.Models;
 using VNotify.Application.ViewModels;
+using VNotify.Common;
 
 namespace VNotify.Application.Views
 {

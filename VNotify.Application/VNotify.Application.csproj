@@ -10,4 +10,10 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VNotify.Common\VNotify.Common.csproj" />
+  </ItemGroup>
 </Project>

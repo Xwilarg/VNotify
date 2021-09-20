@@ -1,5 +1,5 @@
 using ReactiveUI;
-using VNotify.Application.Models;
+using VNotify.Common;
 
 namespace VNotify.Application.ViewModels
 {
