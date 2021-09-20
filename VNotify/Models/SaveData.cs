@@ -5,7 +5,7 @@ namespace VNotify.Models
 {
     public class SaveData
     {
-        public SaveData()
+        private SaveData()
         { }
 
         public static SaveData Load()
@@ -26,8 +26,20 @@ namespace VNotify.Models
             File.WriteAllText("data.json", JsonSerializer.Serialize(this));
         }
 
-        public string ApiKey { set; get; }
+        private string? _apiKey;
+        public string? ApiKey
+        {
+            set
+            {
+                _apiKey = value;
+                StaticObjects.HttpClient.DefaultRequestHeaders.Add("X-APIKEY", _apiKey);
+            }
+            get
+            {
+                return _apiKey;
+            }
+        }
 
-        private static SaveData _saveData;
+        private static SaveData? _saveData;
     }
 }
