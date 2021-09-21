@@ -113,12 +113,13 @@ namespace VNotify.Service
                 // If we didn't already check this video
                 if (!_awaitingVideos.ContainsKey(video.id))
                 {
-                    var tsDelay = video.start_scheduled - DateTime.UtcNow;
+                    var now = DateTime.Now;
+                    var tsDelay = video.start_scheduled - now;
                     var delay = tsDelay.TotalMilliseconds;
 
                     if (delay > 0) // Video didn't start yet
                     {
-                        Console.WriteLine($"Live from {video.channel.name} in {(int)tsDelay.TotalHours} hours, {tsDelay.Minutes} minutes and {tsDelay.Seconds} seconds");
+                        Console.WriteLine($"[{now.Hour}:{now.Minute}:{now.Second}] Live from {video.channel.name} in {(int)tsDelay.TotalHours} hours, {tsDelay.Minutes} minutes and {tsDelay.Seconds} seconds");
                         _awaitingVideos.Add(video.id, video);
                         _ = Task.Run(async () =>
                         {
