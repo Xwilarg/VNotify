@@ -8,6 +8,7 @@ namespace VNotify.Common
     {
         public ApiClient(string apiKey)
         {
+            _httpClient = new();
             _httpClient.DefaultRequestHeaders.Add("X-APIKEY", apiKey);
         }
 
