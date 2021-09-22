@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VNotify.Service
+namespace VNotify.Common
 {
     public record Video
     {

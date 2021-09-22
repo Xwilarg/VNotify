@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Runtime.InteropServices;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VNotify.Common;
@@ -29,8 +27,7 @@ namespace VNotify.Service
             }
 
             // Init HTTP Client
-            _httpClient = new();
-            _httpClient.DefaultRequestHeaders.Add("X-APIKEY", saveData.ApiKey);
+            _apiClient = new(saveData.ApiKey);
             NotificationManager.SendNotification("VNotify", "VNotify is now started!", null, _iconPath);
 
             // Init tray
@@ -107,7 +104,7 @@ namespace VNotify.Service
         private void GetCurrentVideos(object _)
         {
             // Get videos from Holodex API
-            var videos = JsonSerializer.Deserialize<Video[]>(_httpClient.GetStringAsync("https://holodex.net/api/v2/videos?status=upcoming&type=stream&order=asc&include=live_info").GetAwaiter().GetResult());
+            var videos = _apiClient.GetLatestStreams().GetAwaiter().GetResult();
             foreach (var video in videos)
             {
                 // If we didn't already check this video
@@ -143,7 +140,7 @@ namespace VNotify.Service
         private readonly Dictionary<string, Video> _awaitingVideos = new();
 
         private NotificationIcon _tray;
-        private HttpClient _httpClient;
+        private ApiClient _apiClient;
         private Timer _checkTimer;
         private string _iconPath = AppDomain.CurrentDomain.BaseDirectory.Replace('\\', '/') + "../../../tray.ico";
         public bool IsAlive { private set; get; } = true;

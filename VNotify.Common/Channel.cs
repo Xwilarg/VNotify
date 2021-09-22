@@ -1,4 +1,4 @@
-﻿namespace VNotify.Service
+﻿namespace VNotify.Common
 {
     public record Channel
     {
