@@ -5,7 +5,11 @@
         Width="400" Height="200"
         x:Class="VNotify.Application.Views.ChannelLoadingWindow"
         Title="ChannelLoadingWindow">
-  <TextBlock Text="{Binding IntroMessage}"
-           VerticalAlignment="Center"
-           HorizontalAlignment="Center"></TextBlock>
+  <StackPanel VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+    <TextBlock Text="{Binding IntroMessage}"
+               HorizontalAlignment="Center"></TextBlock>
+    <TextBlock Text="{Binding LoadingProgress}"
+               HorizontalAlignment="Center"></TextBlock>
+  </StackPanel>
 </Window>

@@ -22,6 +22,13 @@ namespace VNotify.Common
             return await DoApiCallAsync<Video[]>("https://holodex.net/api/v2/videos?status=upcoming&type=stream&order=asc&include=live_info");
         }
 
+        /// <param name="page">Starts at 0 and must be incremented by one until it returns empty result</param>
+        public async Task<Channel[]> GetChannelsAsync(int page)
+        {
+            var query = "https://holodex.net/api/v2/channels?type=vtuber&limit=100&offset=" + (page * 100);
+            return await DoApiCallAsync<Channel[]>("https://holodex.net/api/v2/channels?type=vtuber&limit=100&offset=" + (page * 100));
+        }
+
         private readonly HttpClient _httpClient;
     }
 }
