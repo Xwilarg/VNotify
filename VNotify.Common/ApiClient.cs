@@ -25,7 +25,6 @@ namespace VNotify.Common
         /// <param name="page">Starts at 0 and must be incremented by one until it returns empty result</param>
         public async Task<Channel[]> GetChannelsAsync(int page)
         {
-            var query = "https://holodex.net/api/v2/channels?type=vtuber&limit=100&offset=" + (page * 100);
             return await DoApiCallAsync<Channel[]>("https://holodex.net/api/v2/channels?type=vtuber&limit=100&offset=" + (page * 100));
         }
 
