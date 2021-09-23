@@ -36,7 +36,7 @@ namespace VNotify.Application.ViewModels
             } while (latestQuery.Length == 100);
             var config = Configuration.Load();
             config.Channels = allChannels.ToArray();
-            Configuration.Save(); // TODO: somehow things are null here
+            Configuration.Save();
         }
     }
 }

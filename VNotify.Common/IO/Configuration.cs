@@ -25,11 +25,7 @@ namespace VNotify.Common.IO
             set => _channels = value;
             get
             {
-                if (_channels == null)
-                {
-                    return Array.Empty<Channel>();
-                }
-                return _channels;
+                return _channels ?? Array.Empty<Channel>();
             }
         }
     }
