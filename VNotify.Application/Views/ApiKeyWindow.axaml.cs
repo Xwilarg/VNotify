@@ -5,7 +5,7 @@ using Avalonia.ReactiveUI;
 using ReactiveUI;
 using System.Reactive;
 using VNotify.Application.ViewModels;
-using VNotify.Common;
+using VNotify.Common.IO;
 
 namespace VNotify.Application.Views
 {
@@ -14,9 +14,6 @@ namespace VNotify.Application.Views
         public ApiKeyWindow()
         {
             AvaloniaXamlLoader.Load(this);
-#if DEBUG
-            this.AttachDevTools();
-#endif
             this.WhenActivated(_ =>
             {
                 ViewModel!.SaveApiKeyAndClose.RegisterHandler(SaveApiKeyAndClose);
@@ -33,7 +30,7 @@ namespace VNotify.Application.Views
 
             var data = SaveData.Load();
             data.ApiKey = apiKey;
-            data.Save();
+            SaveData.Save();
             Close();
 
             context.SetOutput(Unit.Default);

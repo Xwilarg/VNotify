@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
@@ -11,13 +10,10 @@ namespace VNotify.Application.Views
         public MainWindow()
         {
             AvaloniaXamlLoader.Load(this);
-#if DEBUG
-            this.AttachDevTools();
-#endif
 
             this.WhenActivated(_ =>
             {
-                if (!ViewModel!.AreDataLoaded())
+                if (!ViewModel!.IsApiKeyLoaded())
                 {
                     new ApiKeyWindow()
                     {

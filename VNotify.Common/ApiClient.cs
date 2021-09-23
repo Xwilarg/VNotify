@@ -22,6 +22,6 @@ namespace VNotify.Common
             return await DoApiCallAsync<Video[]>("https://holodex.net/api/v2/videos?status=upcoming&type=stream&order=asc&include=live_info");
         }
 
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
     }
 }

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using VNotify.Common;
+using VNotify.Common.IO;
 
 namespace VNotify.Service
 {
@@ -139,10 +140,10 @@ namespace VNotify.Service
         // Contains all infos about streams that didn't start yet
         private readonly Dictionary<string, Video> _awaitingVideos = new();
 
-        private NotificationIcon _tray;
-        private ApiClient _apiClient;
-        private Timer _checkTimer;
-        private string _iconPath = AppDomain.CurrentDomain.BaseDirectory.Replace('\\', '/') + "../../../tray.ico";
+        private readonly NotificationIcon _tray;
+        private readonly ApiClient _apiClient;
+        private readonly Timer _checkTimer;
+        private readonly string _iconPath = AppDomain.CurrentDomain.BaseDirectory.Replace('\\', '/') + "../../../tray.ico";
         public bool IsAlive { private set; get; } = true;
     }
 }
