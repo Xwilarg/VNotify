@@ -1,1 +1,0 @@
-Please manually copy [NotificationIconSharp.1.0.1.nupkg](https://github.com/darkfrostystorm/NotificationTrayIconSharp/releases/tag/1.0.1) here
