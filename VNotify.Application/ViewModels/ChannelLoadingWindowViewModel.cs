@@ -9,9 +9,17 @@ namespace VNotify.Application.ViewModels
     public class ChannelLoadingWindowViewModel : ReactiveObject
     {
         public string IntroMessage { get; } = "Loading information about vtuber, please wait";
-        public string LoadingProgress { private set; get; } = _loadingMessage;
+        private string _loadingProgress = _loadingMessage + "0";
+        public string LoadingProgress
+        {
+            get => _loadingProgress;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _loadingProgress, value);
+            }
+        }
 
-        private readonly static string _loadingMessage = "Vtuber information loaded: ";//TODO: info are not updated
+        private readonly static string _loadingMessage = "Vtuber information loaded: ";
 
         public async Task LoadVtuberInfo()
         {
@@ -28,7 +36,7 @@ namespace VNotify.Application.ViewModels
             } while (latestQuery.Length == 100);
             var config = Configuration.Load();
             config.Channels = allChannels.ToArray();
-            Configuration.Save();
+            Configuration.Save(); // TODO: somehow things are null here
         }
     }
 }

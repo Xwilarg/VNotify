@@ -16,7 +16,8 @@ namespace VNotify.Application.Views
                 var vm = ViewModel;
                 _ = Task.Run(async () =>
                 {
-                    await vm.LoadVtuberInfo();
+                    await vm.LoadVtuberInfo(); // TODO: is somehow called twice??
+                    Close(); // TODO: Not closing the window
                 });
             };
         }

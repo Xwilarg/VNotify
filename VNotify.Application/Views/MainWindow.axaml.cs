@@ -25,10 +25,10 @@ namespace VNotify.Application.Views
                     };
                     new ApiKeyWindow()
                     {
-                        ViewModel = new ApiKeyWindowViewModel()
+                        ViewModel = vm
                     }.Show(this);
                 }
-                else
+                else if (!ViewModel!.AreChannelDataLoaded()) // Channel data not loaded
                 {
                     new ChannelLoadingWindow()
                     {
