@@ -13,11 +13,26 @@ namespace VNotify.Application.Views
 
             this.WhenActivated(_ =>
             {
-                if (!ViewModel!.IsApiKeyLoaded())
+                if (!ViewModel!.IsApiKeyLoaded()) // API key is not loaded yet
                 {
+                    var vm = new ApiKeyWindowViewModel();
+                    vm.OnCompletion += (sender, e) => // When we are done loading it, we need to take care of the "channel loading" part
+                    {
+                        new ChannelLoadingWindow()
+                        {
+                            ViewModel = new ChannelLoadingWindowViewModel()
+                        }.Show(this);
+                    };
                     new ApiKeyWindow()
                     {
                         ViewModel = new ApiKeyWindowViewModel()
+                    }.Show(this);
+                }
+                else
+                {
+                    new ChannelLoadingWindow()
+                    {
+                        ViewModel = new ChannelLoadingWindowViewModel()
                     }.Show(this);
                 }
             });

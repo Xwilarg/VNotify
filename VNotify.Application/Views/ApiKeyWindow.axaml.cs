@@ -1,4 +1,3 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
@@ -31,6 +30,9 @@ namespace VNotify.Application.Views
             var data = SaveData.Load();
             data.ApiKey = apiKey;
             SaveData.Save();
+
+            ViewModel.InvokeOnCompletion();
+
             Close();
 
             context.SetOutput(Unit.Default);

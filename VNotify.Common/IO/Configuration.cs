@@ -1,4 +1,6 @@
-﻿namespace VNotify.Common.IO
+﻿using System;
+
+namespace VNotify.Common.IO
 {
     public class Configuration
     {
@@ -17,6 +19,18 @@
 
         const string _filename = "config.json";
 
-        public string ApiKey { set; get; }
+        private Channel[] _channels;
+        public Channel[] Channels
+        {
+            set => _channels = value;
+            get
+            {
+                if (_channels == null)
+                {
+                    return Array.Empty<Channel>();
+                }
+                return _channels;
+            }
+        }
     }
 }
