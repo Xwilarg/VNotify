@@ -1,5 +1,6 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using Avalonia.Threading;
 using System.Threading.Tasks;
 using VNotify.Application.ViewModels;
 
@@ -13,11 +14,12 @@ namespace VNotify.Application.Views
 
             this.Activated += (sender, e) =>
             {
-                var vm = ViewModel;
-                _ = Task.Run(async () =>
+                ViewModel.LoadVtuberInfo().ContinueWith((_) =>
                 {
-                    await vm.LoadVtuberInfo(); // TODO: is somehow called twice??
-                    Close(); // TODO: Not closing the window
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        Close();
+                    });
                 });
             };
         }
