@@ -15,7 +15,7 @@ namespace VNotify.Application.ViewModels
             => _data.ApiKey != null;
 
         public bool AreChannelDataLoaded()
-            => _config.Channels.Length == 0;
+            => _config.Channels.Length != 0;
 
         private readonly SaveData _data;
         private readonly Configuration _config;
