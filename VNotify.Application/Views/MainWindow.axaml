@@ -15,6 +15,7 @@
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="40"/>
+      <RowDefinition Height="80"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
@@ -23,10 +24,13 @@
                VerticalAlignment="Center"
                Text="{Binding TrayReady}"></TextBlock>
 
-    <StackPanel Grid.Row="1"
-                VerticalAlignment="Center">
+    <StackPanel Grid.Row="2">
+      <TextBlock HorizontalAlignment="Center">Enter a vtuber name:</TextBlock>
       <TextBox HorizontalAlignment="Center"
-               MinWidth="300"></TextBox>
+               Width="300"
+               Text="{Binding Path=VtuberName}"></TextBox>
+      <StackPanel Name="Suggestions">
+      </StackPanel>
     </StackPanel>
   </Grid>
 </Window>
