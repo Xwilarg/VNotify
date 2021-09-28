@@ -68,7 +68,7 @@ namespace VNotify.Application.Views
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Width = 300,
-                    Content = channel.english_name ?? channel.name
+                    Content = channel.name
                 };
                 controls.Add(button);
             }
@@ -79,15 +79,15 @@ namespace VNotify.Application.Views
         }
 
         // https://gist.github.com/Davidblkx/e12ab0bb2aff7fd8072632b396538560
-        private static int LevenshteinDistance(string source1, string source2)
+        private static double LevenshteinDistance(string source1, string source2)
         {
             if (source1 == null || source2 == null)
-                return int.MaxValue;
+                return double.MaxValue;
 
             var source1Length = source1.Length;
             var source2Length = source2.Length;
 
-            var matrix = new int[source1Length + 1, source2Length + 1];
+            var matrix = new double[source1Length + 1, source2Length + 1];
 
             if (source1Length == 0)
                 return source2Length;
@@ -105,7 +105,7 @@ namespace VNotify.Application.Views
                     var cost = (source2[j - 1] == source1[i - 1]) ? 0 : 1;
 
                     matrix[i, j] = Math.Min(
-                        Math.Min(matrix[i - 1, j] + 1, matrix[i, j - 1] + 1),
+                        Math.Min(matrix[i - 1, j] + 1.0, matrix[i, j - 1] + 0.1),
                         matrix[i - 1, j - 1] + cost);
                 }
             }
