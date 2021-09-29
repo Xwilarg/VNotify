@@ -109,6 +109,7 @@ namespace VNotify.Service
         /// </summary>
         private void GetCurrentVideos(object _)
         {
+            Console.WriteLine("Checking for videos...");
             var savedata = SaveData.Load();
             // Get videos from Holodex API
             var videos = _apiClient.GetLatestStreams().GetAwaiter().GetResult();
@@ -117,6 +118,7 @@ namespace VNotify.Service
                 // If we are subcribed to channel, makes sure the current one is there
                 if (savedata.Subscriptions.Count > 0 && !savedata.Subscriptions.Contains(video.channel.id))
                 {
+                    Console.WriteLine($"Ignoring {video.channel.name} (not subscribed)");
                     continue;
                 }
 
@@ -139,8 +141,17 @@ namespace VNotify.Service
                             _awaitingVideos.Remove(video.id);
                         });
                     }
+                    else
+                    {
+                        Console.WriteLine($"Ignoring {video.channel.name} (already started)");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Ignoring {video.channel.name} (already registered)");
                 }
             }
+            Console.WriteLine();
         }
 
         // Update method
