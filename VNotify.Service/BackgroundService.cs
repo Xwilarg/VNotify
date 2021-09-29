@@ -31,6 +31,11 @@ namespace VNotify.Service
             _apiClient = new(saveData.ApiKey);
             NotificationManager.SendNotification("VNotify", "VNotify is now started!", null, _iconPath);
 
+            if (SaveData.Load().Subscriptions.Count == 0)
+            {
+                NotificationManager.SendNotification("VNotify", "You are currently subscribed to all Vtuber channels, you might want to launch the control panel first", null, _iconPath);
+            }
+
             // Init tray
             _tray = new NotificationIcon(_iconPath);
             _tray.NotificationIconSelected += NotificationMenuSelected;
@@ -104,10 +109,17 @@ namespace VNotify.Service
         /// </summary>
         private void GetCurrentVideos(object _)
         {
+            var savedata = SaveData.Load();
             // Get videos from Holodex API
             var videos = _apiClient.GetLatestStreams().GetAwaiter().GetResult();
             foreach (var video in videos)
             {
+                // If we are subcribed to channel, makes sure the current one is there
+                if (savedata.Subscriptions.Count > 0 && !savedata.Subscriptions.Contains(video.id))
+                {
+                    continue;
+                }
+
                 // If we didn't already check this video
                 if (!_awaitingVideos.ContainsKey(video.id))
                 {
