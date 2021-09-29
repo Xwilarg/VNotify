@@ -16,6 +16,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="40"/>
       <RowDefinition Height="80"/>
+      <RowDefinition Height="250"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
@@ -31,6 +32,11 @@
                Text="{Binding Path=VtuberName}"></TextBox>
       <StackPanel Name="Suggestions">
       </StackPanel>
+    </StackPanel>
+
+    <StackPanel Grid.Row="3">
+      <TextBlock HorizontalAlignment="Center">Your subscriptions, click on a name to remove it:</TextBlock>
+      <StackPanel Name="Subscriptions" Margin="0 20 0 0"></StackPanel>
     </StackPanel>
   </Grid>
 </Window>

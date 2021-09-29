@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VNotify.Common;
@@ -37,6 +38,10 @@ namespace VNotify.Application.ViewModels
             var config = Configuration.Load();
             config.Channels = allChannels.ToArray();
             Configuration.Save();
+
+            OnCompletion?.Invoke(this, new());
         }
+
+        public event EventHandler OnCompletion;
     }
 }

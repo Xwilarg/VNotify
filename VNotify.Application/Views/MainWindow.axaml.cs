@@ -29,9 +29,14 @@ namespace VNotify.Application.Views
                     var vm = new ApiKeyWindowViewModel();
                     vm.OnCompletion += (sender, e) => // When we are done loading it, we need to take care of the "channel loading" part
                     {
+                        var loading = new ChannelLoadingWindowViewModel();
+                        loading.OnCompletion += (sender, e) =>
+                        {
+                            UpdateSubscriptionDisplay();
+                        };
                         new ChannelLoadingWindow()
                         {
-                            ViewModel = new ChannelLoadingWindowViewModel()
+                            ViewModel = loading
                         }.Show(this);
                     };
                     new ApiKeyWindow()
@@ -41,10 +46,19 @@ namespace VNotify.Application.Views
                 }
                 else if (!ViewModel!.AreChannelDataLoaded()) // Channel data not loaded
                 {
+                    var loading = new ChannelLoadingWindowViewModel();
+                    loading.OnCompletion += (sender, e) =>
+                    {
+                        UpdateSubscriptionDisplay();
+                    };
                     new ChannelLoadingWindow()
                     {
-                        ViewModel = new ChannelLoadingWindowViewModel()
+                        ViewModel = loading
                     }.Show(this);
+                }
+                else
+                {
+                    UpdateSubscriptionDisplay();
                 }
             });
         }
@@ -68,7 +82,13 @@ namespace VNotify.Application.Views
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Width = 300,
-                    Content = channel.name
+                    Content = channel.name,
+                    Command = ReactiveCommand.Create(() =>
+                    {
+                        SaveData.Load().Subscriptions.Add(channel.id);
+                        SaveData.Save();
+                        UpdateSubscriptionDisplay();
+                    })
                 };
                 controls.Add(button);
             }
@@ -76,6 +96,36 @@ namespace VNotify.Application.Views
             panel.Children.AddRange(controls);
 
             context.SetOutput(Unit.Default);
+        }
+
+        private void UpdateSubscriptionDisplay()
+        {
+            var channels = Configuration.Load().Channels;
+            var subs = SaveData.Load().Subscriptions;
+
+            var subsPanel = this.FindControl<StackPanel>("Subscriptions");
+            subsPanel.Children.Clear();
+
+            List<IControl> controls = new();
+            foreach (var channel in subs
+                .Select(s => channels.FirstOrDefault(ch => ch.id == s))
+            )
+            {
+                var subButton = new Button()
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Width = 200,
+                    Content = channel.name,
+                    Command = ReactiveCommand.Create(() =>
+                    {
+                        SaveData.Load().Subscriptions.Remove(channel.id);
+                        SaveData.Save();
+                        UpdateSubscriptionDisplay();
+                    })
+                };
+                controls.Add(subButton);
+            }
+            subsPanel.Children.AddRange(controls);
         }
 
         // https://gist.github.com/Davidblkx/e12ab0bb2aff7fd8072632b396538560

@@ -1,7 +1,6 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Avalonia.Threading;
-using System.Threading.Tasks;
 using VNotify.Application.ViewModels;
 
 namespace VNotify.Application.Views
