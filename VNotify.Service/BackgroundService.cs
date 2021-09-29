@@ -115,7 +115,7 @@ namespace VNotify.Service
             foreach (var video in videos)
             {
                 // If we are subcribed to channel, makes sure the current one is there
-                if (savedata.Subscriptions.Count > 0 && !savedata.Subscriptions.Contains(video.id))
+                if (savedata.Subscriptions.Count > 0 && !savedata.Subscriptions.Contains(video.channel.id))
                 {
                     continue;
                 }
