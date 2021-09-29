@@ -19,7 +19,7 @@ namespace VNotify.Common
 
         public async Task<Video[]> GetLatestStreams()
         {
-            return await DoApiCallAsync<Video[]>("https://holodex.net/api/v2/videos?status=upcoming&type=stream&order=asc&include=live_info");
+            return await DoApiCallAsync<Video[]>("https://holodex.net/api/v2/videos?status=upcoming&type=stream&order=asc&include=live_info&limit=50");
         }
 
         /// <param name="page">Starts at 0 and must be incremented by one until it returns empty result</param>

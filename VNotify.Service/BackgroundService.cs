@@ -39,7 +39,7 @@ namespace VNotify.Service
             // Init tray
             _tray = new NotificationIcon(_iconPath);
             _tray.NotificationIconSelected += NotificationMenuSelected;
-            _checkTimer = new Timer(new TimerCallback(GetCurrentVideos), null, TimeSpan.Zero, TimeSpan.FromMinutes(30));
+            _checkTimer = new Timer(new TimerCallback(GetCurrentVideos), null, TimeSpan.Zero, TimeSpan.FromMinutes(10));
         }
 
         /// <summary>
